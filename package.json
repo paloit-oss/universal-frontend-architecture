@@ -1,0 +1,13 @@
+{
+    "name": "universal-frontend-architecture",
+    "private": true,
+    "license": "MIT",
+    "description": "Architecture for building Highly Modularized UI Platforms with Sharable Component Libraries",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/universal-frontend-architecture/universal-frontend-architecture.git"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    }
+}
