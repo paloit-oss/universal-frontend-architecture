@@ -1,0 +1,16 @@
+{
+    "name": "@ufa/ufa-boilerplate-generator",
+    "version": "1.0.0",
+    "description": "Boilerplate Code generator",
+    "license": "MIT",
+    "repository": "https://github.com/universal-frontend-architecture/universal-frontend-architecture/tree/master/packages/ufa-boilerplate-generator",
+    "main": "./index.js",
+    "bin": {
+        "ufa-server": "./script.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}

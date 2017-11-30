@@ -8,6 +8,14 @@
         "url": "https://github.com/universal-frontend-architecture/universal-frontend-architecture.git"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "commit": "commit",
+        "commitmsg": "commitlint -e $GIT_PARAMS"
+    },
+    "devDependencies": {
+        "lerna": "2.5.1",
+        "@commitlint/cli": "5.0.1",
+        "@commitlint/config-angular": "4.3.0",
+        "@commitlint/prompt-cli": "5.0.1",
+        "husky": "0.14.3"
     }
 }

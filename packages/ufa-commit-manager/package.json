@@ -1,0 +1,16 @@
+{
+    "name": "@ufa/ufa-commit-manager",
+    "version": "1.0.0",
+    "description": "Commit Manager handling git hooks, commit prompts and linting of commits",
+    "license": "MIT",
+    "repository": "https://github.com/universal-frontend-architecture/universal-frontend-architecture/tree/master/packages/ufa-commit-manager",
+    "main": "./index.js",
+    "bin": {
+        "ufa-server": "./script.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}
