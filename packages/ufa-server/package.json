@@ -1,0 +1,16 @@
+{
+    "name": "@ufa/ufa-server",
+    "version": "1.0.0",
+    "description": "Web Server to serve static resources and mock api endpoints",
+    "license": "MIT",
+    "repository": "https://github.com/universal-frontend-architecture/universal-frontend-architecture/tree/master/packages/ufa-server",
+    "main": "./index.js",
+    "bin": {
+        "ufa-server": "./script.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}

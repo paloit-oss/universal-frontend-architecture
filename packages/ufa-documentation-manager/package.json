@@ -1,0 +1,16 @@
+{
+    "name": "@ufa/ufa-documentation-manager",
+    "version": "1.0.0",
+    "description": "API Documentation Manager",
+    "license": "MIT",
+    "repository": "https://github.com/universal-frontend-architecture/universal-frontend-architecture/tree/master/packages/ufa-documentation-manager",
+    "main": "./index.js",
+    "bin": {
+        "ufa-server": "./script.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}
