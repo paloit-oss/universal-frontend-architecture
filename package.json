@@ -11,11 +11,11 @@
         "commit": "commit",
         "commitmsg": "commitlint -e $GIT_PARAMS"
     },
+    "dependencies": {},
     "devDependencies": {
-        "lerna": "2.5.1",
-        "@commitlint/cli": "5.0.1",
-        "@commitlint/config-angular": "4.3.0",
-        "@commitlint/prompt-cli": "5.0.1",
+        "@commitlint/cli": "5.2.5",
+        "@commitlint/config-angular": "5.1.1",
+        "@commitlint/prompt-cli": "5.2.5",
         "husky": "0.14.3"
     }
 }
