@@ -1,0 +1,22 @@
+{
+    "name": "@ufa/ufa-cli",
+    "version": "1.0.0",
+    "description": "CLI for ReactJS, Angular and VueJS with Typescript",
+    "license": "MIT",
+    "repository": "https://github.com/universal-frontend-architecture/universal-frontend-architecture/tree/master/packages/ufa-cli",
+    "main": "./dist/index.js",
+    "typings": "./dist/index.d.ts",
+    "bin": {
+        "ufa-cli": "./bin/index.js"
+    },
+    "scripts": {
+        "prepare": "tsc -p tsconfig.build.json"
+    },
+    "dependencies": {
+        "@types/node": "8.5.2",
+        "@ufa/ufa-server": "1.0.0"
+    },
+    "devDependencies": {
+        "typescript": "2.6.2"
+    }
+}

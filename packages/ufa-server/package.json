@@ -4,12 +4,13 @@
     "description": "Web Server to serve static resources and mock api endpoints",
     "license": "MIT",
     "repository": "https://github.com/universal-frontend-architecture/universal-frontend-architecture/tree/master/packages/ufa-server",
-    "main": "./src/index.js",
+    "main": "./dist/index.js",
+    "typings": "./dist/index.d.ts",
     "bin": {
         "ufa-server": "./bin/index.js"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "prepare": "tsc -p tsconfig.build.json"
     },
     "dependencies": {
         "yargs": "10.0.3",
@@ -18,10 +19,14 @@
         "body-parser": "1.18.2",
         "connect-multiparty": "2.1.0",
         "cookie-parser": "1.4.3",
-        "filewatcher": "3.0.1"
+        "filewatcher": "3.0.1",
+        "@types/node": "8.5.2",
+        "@types/chalk": "2.2.0",
+        "@types/express": "4.11.0",
+        "@types/body-parser": "1.16.8",
+        "@types/cookie-parser": "1.4.1"
     },
-    "devDependencies": {},
-    "publishConfig": {
-        "access": "public"
+    "devDependencies": {
+        "typescript": "2.6.2"
     }
 }
