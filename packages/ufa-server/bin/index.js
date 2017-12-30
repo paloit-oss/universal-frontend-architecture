@@ -37,8 +37,7 @@ const argv = require('yargs')
     .strict(true)
     .argv;
 
-const ServerEmulator = require('../dist/index.js').ServerEmulator;
-const server = new ServerEmulator();
+const server = require('../lib/index.js');
 server.start(argv);
 
 

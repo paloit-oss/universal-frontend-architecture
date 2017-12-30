@@ -10,18 +10,14 @@
     "scripts": {
         "commit": "commit",
         "commitmsg": "commitlint -e $GIT_PARAMS",
-        "bootstrap": "lerna bootstrap",
-        "test": "lerna run test",
-        "prepare": "lerna run prepare",
-        "clean": "rimraf packages/**/dist"
+        "test": "lerna run test"
     },
     "devDependencies": {
         "@commitlint/cli": "5.2.5",
         "@commitlint/config-angular": "5.1.1",
         "@commitlint/prompt-cli": "5.2.5",
         "husky": "0.14.3",
-        "lerna": "2.5.1",
-        "rimraf": "2.6.2"
+        "lerna": "2.5.1"
     },
     "workspaces": [
         "packages/*"
