@@ -25,7 +25,7 @@ exports.builder = {
     }
 };
 
-exports.handler = function (argv) {
+exports.handler = (argv) => {
     const chalk = require('chalk');
     const server = require('../tools/server');
     const cliConfigs = require('../cli-config');

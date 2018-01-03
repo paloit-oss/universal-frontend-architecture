@@ -3,6 +3,6 @@ exports.aliases = ['exapi'];
 exports.desc = 'Extract Mock API';
 exports.builder = {};
 
-exports.handler = function (argv) {
+exports.handler = (argv) => {
   console.log('Extract Mock API');
 };

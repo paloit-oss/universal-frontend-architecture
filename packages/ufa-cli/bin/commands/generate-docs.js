@@ -7,6 +7,6 @@ exports.builder = {
   }
 };
 
-exports.handler = function (argv) {
+exports.handler = (argv) => {
   console.log('Generate Docs', argv.type);
 };
