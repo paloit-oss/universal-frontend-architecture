@@ -76,11 +76,25 @@ const start = (argv) => {
 
     // Load and watch Static resources and Mock API
     if (mode === 'both' || mode === 'static') {
+        try {
+            fs.accessSync(staticPath);
+        } catch (e) {
+            throw new Error(chalk.red('[ERROR: UFA CLI] Static Assets folder not found!'));
+            process.exit(1);
+        }
+
         fileWatcher.add(staticPath);
         app.use(express.static(staticPath));
     }
 
     if (mode === 'both' || mode === 'api') {
+        try {
+            fs.accessSync(apiPath);
+        } catch (e) {
+            throw new Error(chalk.red('[ERROR: UFA CLI] Mock API Endpoints folder not found!'));
+            process.exit(1);
+        }
+
         fileWatcher.add(apiPath);
 
         // Read Mock API Endpoint files and load them on the server

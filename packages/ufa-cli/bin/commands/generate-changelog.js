@@ -3,6 +3,6 @@ exports.aliases = ['gclog'];
 exports.desc = 'Generate Changelog';
 exports.builder = {};
 
-exports.handler = function (argv) {
+exports.handler = (argv) => {
   console.log('Generate Changelog', argv.type);
 };

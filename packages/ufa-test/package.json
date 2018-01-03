@@ -1,0 +1,15 @@
+{
+    "private": true,
+    "name": "@ufa/ufa-test",
+    "version": "1.0.0",
+    "description": "Test Package",
+    "license": "MIT",
+    "scripts": {
+        "cli": "ufa-cli",
+        "server": "ufa-server"
+    },
+    "devDependencies": {
+        "@ufa/ufa-cli": "1.0.1",
+        "@ufa/ufa-server": "1.0.0"
+    }
+}

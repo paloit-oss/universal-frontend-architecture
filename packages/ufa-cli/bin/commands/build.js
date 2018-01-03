@@ -9,6 +9,6 @@ exports.builder = {
     choices: ['prod', 'dev', 'publish', 'incremental', 'coverage']
   }
 };
-exports.handler = function (argv) {
+exports.handler = (argv) => {
     console.log('Build', argv.mode);
 };

@@ -21,33 +21,9 @@ exports.builder = {
     }
 };
 
-exports.handler = function (argv) {
-    const del = require('del');
-    const _ = require('lodash');
+exports.handler = (argv) => {
     const chalk = require('chalk');
-    const cliConfigs = require('../cli-config');
-
-    let filesToDelete = [];
-
     console.log(chalk.yellow('[Command: UFA CLI] Clean'));
-
-    if(argv.all) {
-         _.forEach(cliConfigs.folder_paths, (value, key) => {
-            filesToDelete.push(value + '**');
-        });
-    }
-
-    if(argv.names) {
-        _.forEach(argv.names, (value) => {
-            filesToDelete.push(cliConfigs.folder_paths[value] + '**');
-        });
-    }
-
-    if(argv.files) {
-        filesToDelete = _.concat(filesToDelete, argv.files);
-    }
-
-    del(filesToDelete);
-
-    console.log(chalk.green('[Success: UFA CLI] Successfully deleted folders/files: ', filesToDelete));
+    const cli = require('../../lib/index');
+    cli.clean(argv);
 };

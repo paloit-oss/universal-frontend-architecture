@@ -10,7 +10,7 @@ var cliDefaultConfigs = {
         dev: './dist-dev',
         docs: './docs',
         coverage: './coverage',
-        mockapi: './extracted-mock-api'
+        mockapi: './mock-api'
     },
     server : {
         port: 9000,

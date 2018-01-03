@@ -10,14 +10,16 @@
     "scripts": {
         "commit": "commit",
         "commitmsg": "commitlint -e $GIT_PARAMS",
-        "test": "lerna run test"
+        "test": "lerna run test",
+        "reset": "rimraf packages/**/node_modules && rimraf node_modules"
     },
     "devDependencies": {
         "@commitlint/cli": "5.2.5",
         "@commitlint/config-angular": "5.1.1",
         "@commitlint/prompt-cli": "5.2.5",
         "husky": "0.14.3",
-        "lerna": "2.5.1"
+        "lerna": "2.5.1",
+        "rimraf": "2.6.2"
     },
     "workspaces": [
         "packages/*"
