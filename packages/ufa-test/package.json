@@ -9,7 +9,7 @@
         "server": "ufa-server"
     },
     "devDependencies": {
-        "@ufa/ufa-cli": "1.0.1",
+        "@ufa/ufa-cli": "1.0.0",
         "@ufa/ufa-server": "1.0.0"
     }
 }

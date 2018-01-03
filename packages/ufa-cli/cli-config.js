@@ -5,6 +5,7 @@ packageJSON.config = packageJSON.config || {};
 packageJSON.config.cli = packageJSON.config.cli || {};
 
 var cliDefaultConfigs = {
+    minimum_node_version: 8,
     folder_paths : {
         prod: './dist',
         dev: './dist-dev',
