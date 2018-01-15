@@ -74,7 +74,7 @@ const start = (argv) => {
     app.use(cookieParser());
     app.set('port', port);
 
-    // Load and watch Static resources and Mock API
+    // Load and watch Static resources
     if (mode === 'both' || mode === 'static') {
         try {
             fs.accessSync(staticPath);
@@ -87,6 +87,7 @@ const start = (argv) => {
         app.use(express.static(staticPath));
     }
 
+    // Load and watch Mock API
     if (mode === 'both' || mode === 'api') {
         try {
             fs.accessSync(apiPath);
@@ -99,8 +100,20 @@ const start = (argv) => {
 
         // Read Mock API Endpoint files and load them on the server
         fs.readdirSync(apiPath).forEach((file) => {
-            const apiEndpoint = require(path.join(apiPath, file));
-            app.use(apiEndpoint.mainUrl, configureRoutes(apiEndpoint.routes));
+            if (file.indexOf('.js') !== -1 && file.indexOf('.json') === -1) {
+                const apiEndpoint = require(path.join(apiPath, file));
+                app.use(apiEndpoint.mainUrl, configureRoutes(apiEndpoint.routes));
+            }
+
+            if (file.indexOf('.json') !== -1) {
+                const jsonEndpoint = require(path.join(apiPath, file));
+                jsonEndpoint.forEach((route) => {
+                    app.get(route.url, function(req, res, next) {
+                        res.json(route.data);
+                    });
+                })
+            }
+
         });
     }
 
