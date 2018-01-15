@@ -3,13 +3,13 @@
     "version": "1.0.0",
     "description": "CLI for ReactJS, Angular and VueJS with Typescript",
     "license": "MIT",
-    "repository": "https://github.com/universal-frontend-architecture/universal-frontend-architecture/tree/master/packages/ufa-cli",
+    "repository": "https://github.com/paloit-oss/universal-frontend-architecture/tree/master/packages/ufa-cli",
     "main": "./lib/index.js",
     "bin": {
         "ufa-cli": "./bin/index.js"
     },
     "scripts": {
-        "server": "ufa-server"
+
     },
     "dependencies": {
         "yargs": "10.0.3",
