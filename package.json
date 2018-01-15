@@ -5,7 +5,7 @@
     "description": "Architecture for building Highly Modularized UI Platforms with Sharable Component Libraries",
     "repository": {
         "type": "git",
-        "url": "https://github.com/universal-frontend-architecture/universal-frontend-architecture.git"
+        "url": "https://github.com/paloit-oss/universal-frontend-architecture.git"
     },
     "scripts": {
         "commit": "commit",
