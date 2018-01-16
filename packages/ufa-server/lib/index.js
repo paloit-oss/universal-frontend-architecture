@@ -1,34 +1,33 @@
 const chalk = require('chalk');
 const path = require('path');
 const fs = require('fs');
-const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const http = require('http');
-const fileWatcher = require('filewatcher')();
+const _ = require('lodash');
 const cwd = process.cwd();
-const multipartyMiddleware = require('connect-multiparty')();
 
 const configureRoutes = (apiEndpointRoutes) => {
+    const multipartyMiddleware = require('connect-multiparty')();
+    const express = require('express');
     const router = express.Router();
 
-    apiEndpointRoutes.forEach((route) => {
-        // Currently only GET, POST and PUT are supported
-        if (route.method === 'GET') {
-            router.get(route.url, route.callback);
-        }
-        else if (route.method === 'POST') {
-            if(route.isupload) {
-                router.post(route.url, multipartyMiddleware, route.callback);
+    if (apiEndpointRoutes) {
+        apiEndpointRoutes.forEach((route) => {
+            // Currently only GET, POST and PUT are supported
+            if (route.method === 'GET') {
+                router.get(route.url, route.callback);
             }
-            else {
-                router.post(route.url, route.callback);
+            else if (route.method === 'POST') {
+                if(route.isupload) {
+                    router.post(route.url, multipartyMiddleware, route.callback);
+                }
+                else {
+                    router.post(route.url, route.callback);
+                }
             }
-        }
-        else if (route.method === 'PUT') {
-            router.put(route.url, route.callback);
-        }
-    });
+            else if (route.method === 'PUT') {
+                router.put(route.url, route.callback);
+            }
+        });
+    }
 
     return router;
 };
@@ -57,22 +56,24 @@ const serverListeners = {
     }
 };
 
-const start = (argv) => {
+const requireUncached = (module) => {
+    delete require.cache[require.resolve(module)]
+    return require(module);
+}
 
-    let mode = argv.mode;
-    let staticPath = path.join(cwd, argv.staticpath);
-    let apiPath = path.join(cwd, argv.apipath);
-    let port = argv.port;
+const serve = (mode, staticPath, apiPath, port) => {
 
-    console.log(chalk.yellow('[UFA Server] Starting...'));
+    const express = require('express');
+    const bodyParser = require('body-parser');
+    const cookieParser = require('cookie-parser');
+    const http = require('http');
 
     // Setup Express App
-    const app = express();
+    let app = express();
     app.use(bodyParser.text({ type: 'text/plain' }));
     app.use(bodyParser.json({ type: 'application/json' }));
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cookieParser());
-    app.set('port', port);
 
     // Load and watch Static resources
     if (mode === 'both' || mode === 'static') {
@@ -83,7 +84,7 @@ const start = (argv) => {
             process.exit(1);
         }
 
-        fileWatcher.add(staticPath);
+
         app.use(express.static(staticPath));
     }
 
@@ -96,29 +97,41 @@ const start = (argv) => {
             process.exit(1);
         }
 
-        fileWatcher.add(apiPath);
+        const JSONEndpoints = {};
 
         // Read Mock API Endpoint files and load them on the server
         fs.readdirSync(apiPath).forEach((file) => {
-            if (file.indexOf('.js') !== -1 && file.indexOf('.json') === -1) {
-                const apiEndpoint = require(path.join(apiPath, file));
-                app.use(apiEndpoint.mainUrl, configureRoutes(apiEndpoint.routes));
-            }
-
             if (file.indexOf('.json') !== -1) {
-                const jsonEndpoint = require(path.join(apiPath, file));
-                jsonEndpoint.forEach((route) => {
-                    app.get(route.url, function(req, res, next) {
-                        res.json(route.data);
-                    });
-                })
+                const jsonEndpoint = requireUncached(path.join(apiPath, file));
+                if (jsonEndpoint) {
+                    if (JSONEndpoints[jsonEndpoint.url]) {
+                        _.merge(JSONEndpoints[jsonEndpoint.url].data, jsonEndpoint.data);
+                    }
+                    else {
+                        JSONEndpoints[jsonEndpoint.url] = jsonEndpoint;
+                    }
+                }
+
+            }
+            else if (file.indexOf('.js') !== -1) {
+                const apiEndpoint = requireUncached(path.join(apiPath, file));
+                if (apiEndpoint) {
+                    app.use(apiEndpoint.mainUrl, configureRoutes(apiEndpoint.routes));
+                }
             }
 
+        });
+
+        _.forEach(JSONEndpoints, function(route, key) {
+            app.get(route.url, function(req, res, next) {
+                res.json(route.data);
+            });
         });
     }
 
     // Create HTTP server.
-    const server = http.createServer(app);
+    app.set('port', port);
+    let server = http.createServer(app);
 
     // Handle Error
     server.on('error', (error) => serverListeners.onError(error, port));
@@ -126,15 +139,32 @@ const start = (argv) => {
     // Handle start
     server.on('listening', () => serverListeners.onListen(port));
 
+    server.listen(port);
+
+    return server;
+};
+
+const start = (argv) => {
+    console.log(chalk.yellow('[UFA Server] Starting...'));
+    let mode = argv.mode;
+    let staticPath = path.join(cwd, argv.staticpath);
+    let apiPath = path.join(cwd, argv.apipath);
+    let port = argv.port;
+
+    const fileWatcher = require('filewatcher')();
+    fileWatcher.add(staticPath);
+    fileWatcher.add(apiPath);
+
+    let server = serve(mode, staticPath, apiPath, port);
+
     // Restart server on any file changes
     fileWatcher.on('change', () => {
         console.log(chalk.yellow('[UFA Server] Restarting...'));
         server.close();
-        server.listen(port);
+        server = null;
+        server = serve(mode, staticPath, apiPath, port);
     });
-
-    server.listen(port);
-};
+}
 
 module.exports = {
     start: start
