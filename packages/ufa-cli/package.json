@@ -18,6 +18,7 @@
         "lodash": "4.17.4",
         "webpack-merge": "4.1.1",
         "shelljs": "0.7.8",
+        "cpx": "1.5.0",
 
         "@ufa/ufa-server": "1.0.0"
     }

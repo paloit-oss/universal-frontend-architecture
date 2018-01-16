@@ -26,14 +26,14 @@ module.exports = (argv) => {
     console.log(chalk.yellow('[Command: UFA CLI] Clean'));
 
     if(argv.all) {
-         _.forEach(cliConfigs.folder_paths, (value, key) => {
+         _.forEach(cliConfigs.folderPaths, (value, key) => {
             filesToDelete.push(value + '**');
         });
     }
 
     if(argv.names) {
         _.forEach(argv.names, (value) => {
-            filesToDelete.push(cliConfigs.folder_paths[value] + '**');
+            filesToDelete.push(cliConfigs.folderPaths[value] + '**');
         });
     }
 

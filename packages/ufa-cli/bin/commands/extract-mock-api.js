@@ -1,8 +1,16 @@
-exports.command = 'extract-mock-api';
-exports.aliases = ['exapi'];
+exports.command = 'extract-mockapi [watch]';
 exports.desc = 'Extract Mock API';
-exports.builder = {};
-
+exports.aliases = ['ema'];
+exports.builder = {
+    watch: {
+        alias: 'w',
+        default: false,
+        type: 'boolean',
+        desc: 'Watch Mode'
+    }
+};
 exports.handler = (argv) => {
-  console.log('Extract Mock API');
+    const chalk = require('chalk');
+    console.log(chalk.yellow('[COMMAND: UFA CLI] Extract Mock API'));
+    require('../../lib/index').extractMockAPI(argv);
 };

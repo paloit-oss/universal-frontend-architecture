@@ -6,10 +6,21 @@
     "license": "MIT",
     "scripts": {
         "cli": "ufa-cli",
-        "server": "ufa-server"
+        "server": "ufa-server",
+        "emulate": "run-p \"cli ema\" \"server\""
     },
     "devDependencies": {
         "@ufa/ufa-cli": "1.0.0",
-        "@ufa/ufa-server": "1.0.0"
+        "@ufa/ufa-server": "1.0.0",
+        "npm-run-all": "4.1.2"
+    },
+    "config": {
+        "cli" : {
+            "server" : {
+                "emulatorAPIModules": [
+                    "@ufa/ufa-test"
+                ]
+            }
+        }
     }
 }
