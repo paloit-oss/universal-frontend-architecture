@@ -10,7 +10,7 @@ module.exports = (argv) => {
 
     shell.exec('node -v', (err, stdout, stderr) => {
         if (err) throw err;
-        if (parseFloat(stdout) < cliConfigs.minimum_node_version) {
+        if (parseFloat(stdout) < cliConfigs.minimumNodeVersion) {
           throw new Error(chalk.red('[ERROR: UFA CLI] You need NodeJS version >= 8'));
           process.exit(1);
         }
