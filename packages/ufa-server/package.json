@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Web Server to serve static resources and mock api endpoints",
     "license": "MIT",
-    "repository": "https://github.com/paloit-oss/universal-frontend-architecture/tree/master/packages/ufa-server",
+    "repository": "https://github.com/universal-frontend-architecture/universal-frontend-architecture/tree/master/packages/ufa-server",
     "main": "./lib/index.js",
     "bin": {
         "ufa-server": "./bin/index.js"
